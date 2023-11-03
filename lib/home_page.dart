@@ -8,54 +8,42 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("CROCHAPP"),
-        backgroundColor: Colors.lightBlueAccent,
-        elevation: 20,
+        toolbarHeight: 54.0,
+        title: Text(
+          "CROCHAPP",
+          style: GoogleFonts.bebasNeue(
+              fontSize: 32, color: const Color.fromRGBO(255, 255, 255, 1)),
+        ),
+        backgroundColor: const Color.fromRGBO(44, 71, 169, 1),
+        elevation: 30,
       ),
-      backgroundColor: Colors.blue,
-      body: Row(
-        children: [
-          Container(
-              alignment: Alignment.center,
-              height: 50,
-              width: 100,
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 128, 207, 243),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10))),
-              child: Text(
-                "My proyects",
-                style: GoogleFonts.bebasNeue(),
-              )),
-          Container(
-              alignment: Alignment.center,
-              height: 50,
-              width: 100,
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 128, 207, 243),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10))),
-              child: Text(
-                "My patterns",
-                style: GoogleFonts.bebasNeue(),
-              )),
-          Container(
-              alignment: Alignment.center,
-              height: 50,
-              width: 100,
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 128, 207, 243),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10))),
-              child: Text(
-                "Counter",
-                style: GoogleFonts.bebasNeue(),
-              ))
-        ],
-      ),
+      backgroundColor: const Color.fromRGBO(233, 238, 255, 1),
+      bottomNavigationBar: const BottomNavigationBarCustom(),
+    );
+  }
+}
+
+class BottomNavigationBarCustom extends StatelessWidget {
+  const BottomNavigationBarCustom({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      elevation: 30,
+      items: const [
+        BottomNavigationBarItem(
+            icon: Icon(Icons.book_rounded),
+            activeIcon: Icon(Icons.book_outlined),
+            label: 'My patterns'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_rounded),
+            activeIcon: Icon(Icons.favorite_border_rounded),
+            label: 'My projects'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.watch_later_rounded),
+            activeIcon: Icon(Icons.watch_later_outlined),
+            label: 'Counter'),
+      ],
     );
   }
 }
