@@ -1,4 +1,4 @@
-import 'package:crochapp/home_page.dart';
+import 'package:crochapp/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
