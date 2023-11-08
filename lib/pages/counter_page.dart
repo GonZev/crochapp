@@ -10,13 +10,14 @@ class CounterPage extends StatefulWidget {
 
 class _CounterPageState extends State<CounterPage> {
   int numberPoints = 0;
+  bool stateSectionPoints = false;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          height: 250,
+          height: 200,
           margin: const EdgeInsets.all(24.0),
           decoration: const BoxDecoration(
               color: Color.fromARGB(255, 91, 91, 169), shape: BoxShape.circle),
@@ -24,7 +25,7 @@ class _CounterPageState extends State<CounterPage> {
             child: Text(
               '$numberPoints',
               style: GoogleFonts.bebasNeue(
-                  fontSize: 150, color: const Color.fromRGBO(255, 255, 255, 1)),
+                  fontSize: 140, color: const Color.fromRGBO(255, 255, 255, 1)),
             ),
           ),
         ),
@@ -49,73 +50,100 @@ class _CounterPageState extends State<CounterPage> {
                 icon: const Icon(Icons.exposure_minus_1)),
           ],
         ),
-        const SizedBox(
-          height: 5,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              height: 50,
-              width: 50,
-              padding: const EdgeInsets.all(4),
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 91, 91, 169),
-                  shape: BoxShape.circle),
-              child: Center(
-                  child: Text(
-                '0',
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 30,
-                ),
-              )),
-            ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: Text(
-                'ROUND',
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 30,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Center(
-          child: Text(
-            'OF',
-            style: GoogleFonts.bebasNeue(fontSize: 24),
+        //Section Text of round and points
+        Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.only(left: 22),
+          child: IconButton(
+            onPressed: () {
+              setState(() {
+                stateSectionPoints = !stateSectionPoints;
+              });
+            },
+            icon: const Icon(Icons.lock),
+            selectedIcon: const Icon(Icons.lock_open_rounded),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              height: 50,
-              width: 50,
-              padding: const EdgeInsets.all(4),
+
+        Opacity(
+          opacity: stateSectionPoints ? 0.5 : 1.0,
+          child: AbsorbPointer(
+            absorbing: stateSectionPoints,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 91, 91, 169),
-                  shape: BoxShape.circle),
-              child: Center(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  color: Colors.black12),
+              child: Column(children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 50,
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 91, 91, 169),
+                          shape: BoxShape.circle),
+                      child: Center(
+                          child: Text(
+                        '0',
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 30,
+                        ),
+                      )),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: Text(
+                        'ROUND',
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 30,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Center(
                   child: Text(
-                '0',
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 30,
+                    'OF',
+                    style: GoogleFonts.bebasNeue(fontSize: 24),
+                  ),
                 ),
-              )),
-            ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: Text(
-                'POINTS',
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 30,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 50,
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 91, 91, 169),
+                          shape: BoxShape.circle),
+                      child: Center(
+                          child: Text(
+                        '0',
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 30,
+                        ),
+                      )),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: Text(
+                        'POINTS',
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 30,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+              ]),
             ),
-          ],
-        ),
+          ),
+        )
       ],
     );
   }
