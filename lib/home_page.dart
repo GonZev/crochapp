@@ -1,3 +1,4 @@
+import 'package:crochapp/services/sqlite_service.dart';
 import 'package:crochapp/ui/counter_page.dart';
 import 'package:crochapp/ui/patterns_page.dart';
 import 'package:crochapp/ui/project_page.dart';
@@ -12,6 +13,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //All data
+  List<Map<String, dynamic>> myData = [];
+  bool _isLoading = true;
+  //this function is used to fetch all data from the database
+  void _refreshData() async {
+    final data = await SqliteService.getAllPatterns();
+    setState(() {
+      myData = data;
+      _isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _refreshData();
+  }
+
   int selectedPageIndex = 1;
 
   @override

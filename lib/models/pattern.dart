@@ -1,11 +1,13 @@
-class Pattern {
+import 'package:sqflite/sqlite_api.dart';
+
+class Design {
   final int id;
   final String name;
   final String content;
 
-  Pattern({required this.id, required this.name, required this.content});
+  Design({required this.id, required this.name, required this.content});
 
-  Pattern.fromMap(Map<String, dynamic> item)
+  Design.fromMap(Map<String, dynamic> item)
       : id = item["id"],
         name = item["name"],
         content = item["content"];
