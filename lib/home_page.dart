@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   //All data
   List<Map<String, dynamic>> myData = [];
   bool _isLoading = true;
+
   //this function is used to fetch all data from the database
   void _refreshData() async {
     final data = await SqliteService.getAllPatterns();
@@ -27,7 +28,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _refreshData();
   }
@@ -53,6 +53,9 @@ class _HomePageState extends State<HomePage> {
           CounterPage()
         ][selectedPageIndex],
         bottomNavigationBar: NavigationBar(
+            elevation: BorderSide.strokeAlignOutside,
+            indicatorColor: const Color.fromRGBO(14, 55, 199, 0.1),
+            shadowColor: Colors.grey,
             onDestinationSelected: (int index) {
               setState(() {
                 selectedPageIndex = index;
