@@ -26,13 +26,16 @@ class CreatePatternPage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              Text(
-                'New Pattern',
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 36,
-                  color: Colors.blue,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'New Pattern',
+                  style: GoogleFonts.bebasNeue(
+                    fontSize: 36,
+                    color: Colors.blue,
+                  ),
+                  textAlign: TextAlign.start,
                 ),
-                textAlign: TextAlign.start,
               ),
               const TextField(
                 textAlign: TextAlign.start,
@@ -53,7 +56,83 @@ class CreatePatternPage extends StatelessWidget {
                   'Round',
                   style: GoogleFonts.bebasNeue(fontSize: 28),
                 ),
-              )
+              ),
+              const TextField(
+                textAlign: TextAlign.start,
+                decoration: InputDecoration(
+                  hintText: 'R1. ...',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.blueAccent,
+                        width: 1.0,
+                        style: BorderStyle.solid),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              OutlinedButton(
+                onPressed: () {},
+                style: OutlinedButton.styleFrom(
+                    elevation: 10.0,
+                    backgroundColor: Colors.green,
+                    padding: const EdgeInsets.all(4)),
+                child: Text(
+                  'ADD',
+                  style:
+                      GoogleFonts.bebasNeue(fontSize: 22, color: Colors.white),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: [
+                    const Opacity(
+                      opacity: 0.8,
+                      child: TextField(
+                        readOnly: false,
+                        decoration: InputDecoration(
+                          hintText: 'text patterns ... ',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.grey,
+                                width: 1.0,
+                                style: BorderStyle.solid),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          OutlinedButton(
+                            onPressed: () {},
+                            style: OutlinedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                padding: const EdgeInsets.all(4)),
+                            child: Text(
+                              'EDIT',
+                              style: GoogleFonts.bebasNeue(
+                                  fontSize: 22, color: Colors.white),
+                            ),
+                          ),
+                          OutlinedButton(
+                            onPressed: () {},
+                            style: OutlinedButton.styleFrom(
+                                elevation: 10.0,
+                                backgroundColor: Colors.green,
+                                padding: const EdgeInsets.all(8)),
+                            child: Text(
+                              'ADD IMAGE',
+                              style: GoogleFonts.bebasNeue(
+                                  fontSize: 22, color: Colors.white),
+                            ),
+                          ),
+                        ]),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
