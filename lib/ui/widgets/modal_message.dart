@@ -8,17 +8,22 @@ modalMessage(context, String message) {
         return Dialog(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-          child: Container(
-            constraints: const BoxConstraints(maxHeight: 100),
+          child: SizedBox(
+            height: 100,
+            width: 300,
+            // constraints: const BoxConstraints(maxHeight: 100, maxWidth: 300),
             child: Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: const EdgeInsets.all(24.0),
               child: Column(children: [
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                      text: message,
-                      style: GoogleFonts.bebasNeue(
-                          fontSize: 20, color: Colors.black)),
+                Align(
+                  alignment: Alignment.center,
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                        text: message,
+                        style: GoogleFonts.bebasNeue(
+                            fontSize: 20, color: Colors.black)),
+                  ),
                 ),
               ]),
             ),

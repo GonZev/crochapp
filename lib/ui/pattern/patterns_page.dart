@@ -1,5 +1,6 @@
-import 'package:crochapp/ui/create_pattern_page.dart';
+import 'package:crochapp/ui/pattern/create_pattern_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 myItem() {
   return Container(
@@ -27,7 +28,6 @@ class PatternsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return const Center(child: Text('PATTERNS'));
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white70,
@@ -46,20 +46,27 @@ class PatternsPage extends StatelessWidget {
           size: 50,
         ),
       ),
-      body: ListView(
-        children: [
-          myItem(),
-          myItem(),
-          myItem(),
-          myItem(),
-          myItem(),
-          myItem(),
-          myItem(),
-          myItem(),
-          myItem(),
-          myItem(),
-          myItem(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+        child: ListView(
+          children: [
+            Text(
+              'PATTERNS',
+              style: GoogleFonts.bebasNeue(fontSize: 40),
+            ),
+            myItem(),
+            myItem(),
+            myItem(),
+            myItem(),
+            myItem(),
+            myItem(),
+            myItem(),
+            myItem(),
+            myItem(),
+            myItem(),
+            myItem(),
+          ],
+        ),
       ),
     );
   }

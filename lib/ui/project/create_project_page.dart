@@ -2,14 +2,30 @@ import 'package:crochapp/ui/widgets/modal_message.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CreatePatternPage extends StatefulWidget {
-  const CreatePatternPage({super.key});
+writeRound(
+    TextEditingController valueRound, TextEditingController valuePattern) {
+  //I can save the rounds at a list ???
 
-  @override
-  State<CreatePatternPage> createState() => _CreatePatternPageState();
+  if (valueRound.text.isNotEmpty) {
+    if (valuePattern.text.isEmpty) {
+      valuePattern.text = valueRound.text.toString();
+    } else {
+      valuePattern.text =
+          '${valuePattern.text.toString()}\n${valueRound.text.toString()}';
+    }
+  }
+
+  return valuePattern.text.toString();
 }
 
-class _CreatePatternPageState extends State<CreatePatternPage> {
+class CreateProjectPage extends StatefulWidget {
+  const CreateProjectPage({super.key});
+
+  @override
+  State<CreateProjectPage> createState() => _CreateProjectPageState();
+}
+
+class _CreateProjectPageState extends State<CreateProjectPage> {
   //controllers of fields
   final nameTextFieldController = TextEditingController();
   final addRoundTextFieldController = TextEditingController();
@@ -49,17 +65,19 @@ class _CreatePatternPageState extends State<CreatePatternPage> {
                 ),
               ),
 
-              // MARK: FIELD NAME PATTERN
+              // NOTE: FIELD NAME PATTERN
               TextField(
                 controller: nameTextFieldController,
                 textAlign: TextAlign.start,
                 decoration: const InputDecoration(
-                    hintText: 'Name pattern',
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.blueAccent,
-                            width: 1.0,
-                            style: BorderStyle.solid))),
+                  hintText: 'Name pattern',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.blueAccent,
+                        width: 1.0,
+                        style: BorderStyle.solid),
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 30,
@@ -72,7 +90,7 @@ class _CreatePatternPageState extends State<CreatePatternPage> {
                 ),
               ),
 
-              //MARK: FIELD ADD ROUND
+              //NOTE: FIELD ADD ROUND
               TextField(
                 controller: addRoundTextFieldController,
                 textAlign: TextAlign.start,
@@ -88,7 +106,7 @@ class _CreatePatternPageState extends State<CreatePatternPage> {
               ),
               const SizedBox(height: 10),
 
-              //MARK: BUTTON ADD ROUND
+              //NOTE: BUTTON ADD ROUND
               OutlinedButton(
                 onPressed: () {
                   setState(() {
@@ -167,7 +185,7 @@ class _CreatePatternPageState extends State<CreatePatternPage> {
                 height: 50,
               ),
 
-              // MARK: BTN CREATE
+              // NOTE: BTN CREATE
               ElevatedButton(
                   onPressed: () {
                     if (nameTextFieldController.text.isEmpty ||
@@ -193,20 +211,4 @@ class _CreatePatternPageState extends State<CreatePatternPage> {
       ),
     );
   }
-}
-
-writeRound(
-    TextEditingController valueRound, TextEditingController valuePattern) {
-  //I can save the rounds at a list ???
-
-  if (valueRound.text.isNotEmpty) {
-    if (valuePattern.text.isEmpty) {
-      valuePattern.text = valueRound.text.toString();
-    } else {
-      valuePattern.text =
-          '${valuePattern.text.toString()}\n${valueRound.text.toString()}';
-    }
-  }
-
-  return valuePattern.text.toString();
 }
