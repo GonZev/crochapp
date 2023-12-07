@@ -14,7 +14,7 @@ modalMessage(context, String message) {
               padding: const EdgeInsets.all(18.0),
               child: Column(children: [
                 RichText(
-                  textAlign: TextAlign.justify,
+                  textAlign: TextAlign.center,
                   text: TextSpan(
                       text: message,
                       style: GoogleFonts.bebasNeue(

@@ -1,8 +1,19 @@
+import 'package:crochapp/ui/widgets/modal_message.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CreatePatternPage extends StatelessWidget {
+class CreatePatternPage extends StatefulWidget {
   const CreatePatternPage({super.key});
+
+  @override
+  State<CreatePatternPage> createState() => _CreatePatternPageState();
+}
+
+class _CreatePatternPageState extends State<CreatePatternPage> {
+  //controllers of fields
+  final nameTextFieldController = TextEditingController();
+  final addRoundTextFieldController = TextEditingController();
+  final patternTextFieldController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +48,12 @@ class CreatePatternPage extends StatelessWidget {
                   textAlign: TextAlign.start,
                 ),
               ),
-              const TextField(
+
+              // MARK: FIELD NAME PATTERN
+              TextField(
+                controller: nameTextFieldController,
                 textAlign: TextAlign.start,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: 'Name pattern',
                     border: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -57,9 +71,12 @@ class CreatePatternPage extends StatelessWidget {
                   style: GoogleFonts.bebasNeue(fontSize: 28),
                 ),
               ),
-              const TextField(
+
+              //MARK: FIELD ADD ROUND
+              TextField(
+                controller: addRoundTextFieldController,
                 textAlign: TextAlign.start,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'R1. ...',
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -70,8 +87,17 @@ class CreatePatternPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
+
+              //MARK: BUTTON ADD ROUND
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    patternTextFieldController.text = writeRound(
+                        addRoundTextFieldController,
+                        patternTextFieldController);
+                    addRoundTextFieldController.clear();
+                  });
+                },
                 style: OutlinedButton.styleFrom(
                     elevation: 10.0,
                     backgroundColor: Colors.green,
@@ -87,11 +113,15 @@ class CreatePatternPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   children: [
-                    const Opacity(
+                    Opacity(
                       opacity: 0.8,
                       child: TextField(
+                        controller: patternTextFieldController,
+                        minLines: 1,
+                        maxLines: 300,
                         readOnly: false,
-                        decoration: InputDecoration(
+                        style: GoogleFonts.bebasNeue(fontSize: 18),
+                        decoration: const InputDecoration(
                           hintText: 'text patterns ... ',
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -133,10 +163,50 @@ class CreatePatternPage extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 50,
+              ),
+
+              // MARK: BTN CREATE
+              ElevatedButton(
+                  onPressed: () {
+                    if (nameTextFieldController.text.isEmpty ||
+                        patternTextFieldController.text.isEmpty) {
+                      modalMessage(context,
+                          'Name of pattern or Pattern should\'nt empty');
+                    } else {
+                      //TODO: MAKE FUNCTION CREATE
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      elevation: 5,
+                      fixedSize: const Size(128.0, 40.0)),
+                  child: Text(
+                    'CREATE',
+                    style: GoogleFonts.bebasNeue(
+                        fontSize: 24, color: Colors.white),
+                  ))
             ],
           ),
         ),
       ),
     );
   }
+}
+
+writeRound(
+    TextEditingController valueRound, TextEditingController valuePattern) {
+  //I can save the rounds at a list ???
+
+  if (valueRound.text.isNotEmpty) {
+    if (valuePattern.text.isEmpty) {
+      valuePattern.text = valueRound.text.toString();
+    } else {
+      valuePattern.text =
+          '${valuePattern.text.toString()}\n${valueRound.text.toString()}';
+    }
+  }
+
+  return valuePattern.text.toString();
 }
