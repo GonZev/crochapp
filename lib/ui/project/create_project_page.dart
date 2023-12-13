@@ -1,3 +1,5 @@
+import 'package:crochapp/ui/pattern/create_pattern_page.dart';
+import 'package:crochapp/ui/pattern/list_pattern_page.dart';
 import 'package:crochapp/ui/widgets/modal_message.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -65,7 +67,7 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
                 ),
               ),
 
-              // NOTE: FIELD NAME PATTERN
+              // NOTE: FIELD NAME PROJECT
               TextField(
                 controller: nameTextFieldController,
                 textAlign: TextAlign.start,
@@ -85,126 +87,91 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Round',
+                  'Choose',
                   style: GoogleFonts.bebasNeue(fontSize: 28),
                 ),
               ),
 
-              //NOTE: FIELD ADD ROUND
-              TextField(
-                controller: addRoundTextFieldController,
-                textAlign: TextAlign.start,
-                decoration: const InputDecoration(
-                  hintText: 'R1. ...',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.blueAccent,
-                        width: 1.0,
-                        style: BorderStyle.solid),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-
-              //NOTE: BUTTON ADD ROUND
-              OutlinedButton(
-                onPressed: () {
-                  setState(() {
-                    patternTextFieldController.text = writeRound(
-                        addRoundTextFieldController,
-                        patternTextFieldController);
-                    addRoundTextFieldController.clear();
-                  });
-                },
-                style: OutlinedButton.styleFrom(
-                    elevation: 10.0,
-                    backgroundColor: Colors.green,
-                    padding: const EdgeInsets.all(4)),
-                child: Text(
-                  'ADD',
-                  style:
-                      GoogleFonts.bebasNeue(fontSize: 22, color: Colors.white),
-                ),
-              ),
               const SizedBox(height: 10),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Opacity(
-                      opacity: 0.8,
-                      child: TextField(
-                        controller: patternTextFieldController,
-                        minLines: 1,
-                        maxLines: 300,
-                        readOnly: false,
-                        style: GoogleFonts.bebasNeue(fontSize: 18),
-                        decoration: const InputDecoration(
-                          hintText: 'text patterns ... ',
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.grey,
-                                width: 1.0,
-                                style: BorderStyle.solid),
+                    //NOTE: BUTTON SELECT PATTERN
+                    OutlinedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ListPatternsPage(),
                           ),
-                        ),
+                        );
+                      },
+                      style: OutlinedButton.styleFrom(
+                          side: BorderSide.none,
+                          backgroundColor: Colors.green,
+                          padding: const EdgeInsets.all(8)),
+                      child: Text(
+                        'SELECT PATTERN',
+                        style: GoogleFonts.bebasNeue(
+                            fontSize: 22, color: Colors.white),
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          OutlinedButton(
-                            onPressed: () {},
-                            style: OutlinedButton.styleFrom(
-                                backgroundColor: Colors.green,
-                                padding: const EdgeInsets.all(4)),
-                            child: Text(
-                              'EDIT',
-                              style: GoogleFonts.bebasNeue(
-                                  fontSize: 22, color: Colors.white),
-                            ),
+
+                    //NOTE: BUTTON WRITE PATTERN
+                    OutlinedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CreatePatternPage(),
                           ),
-                          OutlinedButton(
-                            onPressed: () {},
-                            style: OutlinedButton.styleFrom(
-                                elevation: 10.0,
-                                backgroundColor: Colors.green,
-                                padding: const EdgeInsets.all(8)),
-                            child: Text(
-                              'ADD IMAGE',
-                              style: GoogleFonts.bebasNeue(
-                                  fontSize: 22, color: Colors.white),
-                            ),
-                          ),
-                        ]),
+                        );
+                      },
+                      style: OutlinedButton.styleFrom(
+                          side: BorderSide.none,
+                          backgroundColor: Colors.yellow,
+                          padding: const EdgeInsets.all(8)),
+                      child: Text(
+                        'WRITE PATTERN',
+                        style: GoogleFonts.bebasNeue(
+                            fontSize: 22, color: Colors.black),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 50,
-              ),
+
+              LayoutBuilder(builder: (context, constraints) {
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                );
+              }),
 
               // NOTE: BTN CREATE
-              ElevatedButton(
-                  onPressed: () {
-                    if (nameTextFieldController.text.isEmpty ||
-                        patternTextFieldController.text.isEmpty) {
-                      modalMessage(context,
-                          'Name of pattern or Pattern should\'nt empty');
-                    } else {
-                      //TODO: MAKE FUNCTION CREATE
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      elevation: 5,
-                      fixedSize: const Size(128.0, 40.0)),
-                  child: Text(
-                    'CREATE',
-                    style: GoogleFonts.bebasNeue(
-                        fontSize: 24, color: Colors.white),
-                  ))
+              Container(
+                alignment: Alignment.bottomCenter,
+                child: ElevatedButton(
+                    onPressed: () {
+                      if (nameTextFieldController.text.isEmpty ||
+                          patternTextFieldController.text.isEmpty) {
+                        modalMessage(context,
+                            'Name of project or pattern should\'nt empty');
+                      } else {
+                        //TODO: MAKE FUNCTION CREATE
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        elevation: 5,
+                        fixedSize: const Size(130.0, 40.0)),
+                    child: Text(
+                      'CREATE',
+                      style: GoogleFonts.bebasNeue(
+                          fontSize: 24, color: Colors.white),
+                    )),
+              )
             ],
           ),
         ),

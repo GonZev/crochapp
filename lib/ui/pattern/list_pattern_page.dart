@@ -1,38 +1,35 @@
-import 'package:crochapp/ui/project/create_project_page.dart';
+import 'package:crochapp/ui/pattern/patterns_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../pattern/patterns_page.dart';
+class ListPatternsPage extends StatefulWidget {
+  const ListPatternsPage({super.key});
 
-class ProjectPage extends StatelessWidget {
-  const ProjectPage({super.key});
+  @override
+  State<ListPatternsPage> createState() => _ListPatternsPageState();
+}
 
+class _ListPatternsPageState extends State<ListPatternsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white70,
-        tooltip: "Add new project",
-        elevation: 3.0,
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const CreateProjectPage(),
-            ),
-          );
-        },
-        child: const Icon(
-          Icons.add_circle_rounded,
-          size: 50,
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white, grade: 0.5),
+        toolbarHeight: 54.0,
+        title: Text(
+          "CROCHAPP",
+          style: GoogleFonts.bebasNeue(
+              fontSize: 24, color: const Color.fromRGBO(255, 255, 255, 1)),
         ),
+        backgroundColor: const Color.fromRGBO(14, 55, 199, 1),
+        elevation: 30,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0),
         child: ListView(
           children: [
             Text(
-              'PROJECTS',
+              'ALL PATTERNS',
               style: GoogleFonts.bebasNeue(fontSize: 40),
             ),
             myItem(),
@@ -52,3 +49,4 @@ class ProjectPage extends StatelessWidget {
     );
   }
 }
+
