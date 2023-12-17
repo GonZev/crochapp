@@ -1,6 +1,6 @@
-import 'package:crochapp/ui/counter_page.dart';
-import 'package:crochapp/ui/pattern/patterns_page.dart';
-import 'package:crochapp/ui/project/project_page.dart';
+import 'package:crochapp/pages/counter_page.dart';
+import 'package:crochapp/pages/pattern/patterns_page.dart';
+import 'package:crochapp/pages/project/project_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

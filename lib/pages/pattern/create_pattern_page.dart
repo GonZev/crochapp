@@ -1,4 +1,5 @@
-import 'package:crochapp/ui/widgets/modal_message.dart';
+import 'package:crochapp/controller/hive_functions.dart';
+import 'package:crochapp/pages/widgets/modal_message.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -30,6 +31,10 @@ class _CreatePatternPageState extends State<CreatePatternPage> {
   final nameTextFieldController = TextEditingController();
   final addRoundTextFieldController = TextEditingController();
   final patternTextFieldController = TextEditingController();
+
+  //Local variable where we save
+  //the hive data of current context
+  List myHiveData = [];
 
   @override
   Widget build(BuildContext context) {
@@ -194,6 +199,13 @@ class _CreatePatternPageState extends State<CreatePatternPage> {
                           'Name of pattern or Pattern should\'nt empty');
                     } else {
                       //TODO: MAKE FUNCTION CREATE
+                      createPattern(nameTextFieldController.text,
+                          patternTextFieldController.text);
+
+                      nameTextFieldController.text = '';
+                      patternTextFieldController.text = '';
+
+                      Navigator.of(context).pop();
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -211,4 +223,11 @@ class _CreatePatternPageState extends State<CreatePatternPage> {
       ),
     );
   }
+}
+
+void createPattern(String nameText, String patternText) {
+  HiveFunctions.createPattern({
+    "name": nameText,
+    "content": patternText,
+  });
 }

@@ -1,4 +1,4 @@
-import 'package:crochapp/ui/pattern/patterns_page.dart';
+import 'package:crochapp/pages/pattern/patterns_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,6 +10,8 @@ class ListPatternsPage extends StatefulWidget {
 }
 
 class _ListPatternsPageState extends State<ListPatternsPage> {
+  List myHiveData = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,27 +28,28 @@ class _ListPatternsPageState extends State<ListPatternsPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0),
-        child: ListView(
-          children: [
-            Text(
-              'ALL PATTERNS',
-              style: GoogleFonts.bebasNeue(fontSize: 40),
-            ),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-          ],
-        ),
+        child: myHiveData.isEmpty
+            ? const Center(child: Text('No data'))
+            : ListView(
+                children: [
+                  Text(
+                    'ALL PATTERNS',
+                    style: GoogleFonts.bebasNeue(fontSize: 40),
+                  ),
+                  myItem('name'),
+                  myItem('name'),
+                  myItem('name'),
+                  myItem('name'),
+                  myItem('name'),
+                  myItem('name'),
+                  myItem('name'),
+                  myItem('name'),
+                  myItem('name'),
+                  myItem('name'),
+                  myItem('name'),
+                ],
+              ),
       ),
     );
   }
 }
-

@@ -1,4 +1,4 @@
-import 'package:crochapp/ui/project/create_project_page.dart';
+import 'package:crochapp/pages/project/create_project_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -35,17 +35,17 @@ class ProjectPage extends StatelessWidget {
               'PROJECTS',
               style: GoogleFonts.bebasNeue(fontSize: 40),
             ),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
-            myItem(),
+            myItem('name'),
+            myItem('name'),
+            myItem('name'),
+            myItem('name'),
+            myItem('name'),
+            myItem('name'),
+            myItem('name'),
+            myItem('name'),
+            myItem('name'),
+            myItem('name'),
+            myItem('name'),
           ],
         ),
       ),

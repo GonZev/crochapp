@@ -1,5 +1,5 @@
-import 'package:crochapp/ui/widgets/circle_mini.dart';
-import 'package:crochapp/ui/widgets/modal_message.dart';
+import 'package:crochapp/pages/widgets/circle_mini.dart';
+import 'package:crochapp/pages/widgets/modal_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
