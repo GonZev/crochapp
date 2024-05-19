@@ -14,4 +14,9 @@ class PatternModel {
   final String content;
 
   PatternModel(this.id, this.name, this.content);
+
+  PatternModel.empty()
+      : id = 0,
+        name = "",
+        content = "";
 }

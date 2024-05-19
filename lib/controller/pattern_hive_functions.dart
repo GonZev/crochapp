@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-class HiveFunctions {
+class PatternHiveFunctions {
   static final patternBox = Hive.box('patterns');
 
   //Create or add single data in hive
@@ -14,7 +14,7 @@ class HiveFunctions {
       final value = patternBox.get(key);
       return {"id": key, "name": value["name"], "content": value["content"]};
     }).toList();
-
+    
     return data.reversed.toList();
   }
 

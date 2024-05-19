@@ -1,7 +1,8 @@
-import 'package:crochapp/controller/hive_functions.dart';
 import 'package:crochapp/pages/pattern/create_pattern_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../controller/pattern_hive_functions.dart';
 
 myItem(String namePattern) {
   return Container(
@@ -32,21 +33,9 @@ class PatternsPage extends StatefulWidget {
 }
 
 class _PatternsPageState extends State<PatternsPage> {
-  //List myHiveData = [
-  //  PatternModel(0, "OSITO", "R1."),
-  //  PatternModel(1, "OSITO", "R1."),
-  //  PatternModel(2, "OSITO", "R1."),
-  //  PatternModel(3, "OSITO", "R1."),
-  //  PatternModel(4, "OSITO", "R1."),
-  //  PatternModel(5, "OSITO", "R1."),
-  //  PatternModel(6, "OSITO", "R1."),
-  //  PatternModel(7, "Gatito", "R1."),
-  //  PatternModel(6, "OSITO", "R1."),
-  //  PatternModel(7, "Gatito", "R1."),
-  //];
   List myHiveData = [];
   getHiveData() {
-    myHiveData = HiveFunctions.getAllPatterns();
+    myHiveData = PatternHiveFunctions.getAllPatterns();
     print(":::LOADING PATTERNS:::");
     setState(() {});
   }

@@ -1,7 +1,16 @@
-import 'package:crochapp/controller/hive_functions.dart';
+import 'package:crochapp/controller/pattern_hive_functions.dart';
+import 'package:crochapp/models/pattern_model.dart';
 import 'package:crochapp/pages/widgets/modal_message.dart';
+import 'package:crochapp/singleton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+void createPattern(String nameText, String patternText) {
+  PatternHiveFunctions.createPattern({
+    "name": nameText,
+    "content": patternText,
+  });
+}
 
 writeRound(
     TextEditingController valueRound, TextEditingController valuePattern) {
@@ -190,7 +199,6 @@ class _CreatePatternPageState extends State<CreatePatternPage> {
                 height: 50,
               ),
 
-              // NOTE: BTN CREATE
               ElevatedButton(
                   onPressed: () {
                     if (nameTextFieldController.text.isEmpty ||
@@ -198,14 +206,30 @@ class _CreatePatternPageState extends State<CreatePatternPage> {
                       modalMessage(context,
                           'Name of pattern or Pattern should\'nt empty');
                     } else {
-                      //TODO: MAKE FUNCTION CREATE
                       createPattern(nameTextFieldController.text,
                           patternTextFieldController.text);
+
+                      // here send info of pattern
+                      // if the screen previous is about new project
+                      // i use Singleton for share data
+                      if (Singleton().backto) {
+                        final listPatterns =
+                            PatternHiveFunctions.getAllPatterns();
+                        Singleton().pattern = PatternModel(
+                            listPatterns.length - 1,
+                            nameTextFieldController.text,
+                            patternTextFieldController.text);
+                        Singleton().backto = false;
+
+                        print(Singleton().pattern.name);
+                        print(Singleton().pattern.content);
+                      }
 
                       nameTextFieldController.text = '';
                       patternTextFieldController.text = '';
 
                       Navigator.of(context).pop();
+                      // Navigator.pop(context);
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -223,11 +247,4 @@ class _CreatePatternPageState extends State<CreatePatternPage> {
       ),
     );
   }
-}
-
-void createPattern(String nameText, String patternText) {
-  HiveFunctions.createPattern({
-    "name": nameText,
-    "content": patternText,
-  });
 }

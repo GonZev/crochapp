@@ -75,6 +75,7 @@ class _CounterPageState extends State<CounterPage> {
                         style: GoogleFonts.bebasNeue(
                             fontSize: 140, color: Colors.white),
                         decoration: const InputDecoration(
+                            border: InputBorder.none,
                             hintStyle: TextStyle(color: Colors.white),
                             disabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide.none),
@@ -170,6 +171,7 @@ class _CounterPageState extends State<CounterPage> {
                                 fontSize: 30,
                               ),
                               decoration: const InputDecoration(
+                                  border: InputBorder.none,
                                   hintText: '0',
                                   floatingLabelAlignment:
                                       FloatingLabelAlignment.center),
@@ -212,6 +214,7 @@ class _CounterPageState extends State<CounterPage> {
                                 fontSize: 30,
                               ),
                               decoration: const InputDecoration(
+                                  border: InputBorder.none,
                                   hintText: '0',
                                   floatingLabelAlignment:
                                       FloatingLabelAlignment.center),

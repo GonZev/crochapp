@@ -3,13 +3,17 @@ import 'package:crochapp/models/pattern_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'models/project_model.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Initialize hive
   await Hive.initFlutter();
   Hive.registerAdapter(PatternModelAdapter());
+  Hive.registerAdapter(ProjectModelAdapter());
 
   await Hive.openBox('patterns');
+  await Hive.openBox('projects');
   runApp(const MyApp());
 }
 

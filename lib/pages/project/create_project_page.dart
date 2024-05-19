@@ -1,8 +1,19 @@
+import 'package:crochapp/controller/project_hive_functions.dart';
 import 'package:crochapp/pages/pattern/create_pattern_page.dart';
 import 'package:crochapp/pages/pattern/list_pattern_page.dart';
 import 'package:crochapp/pages/widgets/modal_message.dart';
+import 'package:crochapp/singleton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../models/pattern_model.dart';
+
+void createProject(String nameProject, PatternModel pattern) {
+  ProjectHiveFunctions.createProject({
+    "name": nameProject,
+    "pattern": pattern,
+  });
+}
 
 writeRound(
     TextEditingController valueRound, TextEditingController valuePattern) {
@@ -33,6 +44,8 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
   final addRoundTextFieldController = TextEditingController();
   final patternTextFieldController = TextEditingController();
 
+  var pattern = PatternModel.empty();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +71,7 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'New Pattern',
+                  'New Project',
                   style: GoogleFonts.bebasNeue(
                     fontSize: 36,
                     color: Colors.blue,
@@ -66,13 +79,15 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
                   textAlign: TextAlign.start,
                 ),
               ),
-
+              const SizedBox(
+                height: 10,
+              ),
               // NOTE: FIELD NAME PROJECT
               TextField(
                 controller: nameTextFieldController,
                 textAlign: TextAlign.start,
                 decoration: const InputDecoration(
-                  hintText: 'Name pattern',
+                  hintText: 'Name project',
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
                         color: Colors.blueAccent,
@@ -84,62 +99,85 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
               const SizedBox(
                 height: 30,
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Choose',
-                  style: GoogleFonts.bebasNeue(fontSize: 28),
+              Visibility(
+                visible: Singleton().pattern.name.isEmpty,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Choose',
+                    style: GoogleFonts.bebasNeue(fontSize: 28),
+                  ),
                 ),
               ),
 
               const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    //NOTE: BUTTON SELECT PATTERN
-                    OutlinedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ListPatternsPage(),
-                          ),
-                        );
-                      },
-                      style: OutlinedButton.styleFrom(
-                          side: BorderSide.none,
-                          backgroundColor: Colors.green,
-                          padding: const EdgeInsets.all(8)),
-                      child: Text(
-                        'SELECT PATTERN',
-                        style: GoogleFonts.bebasNeue(
-                            fontSize: 22, color: Colors.white),
-                      ),
-                    ),
 
-                    //NOTE: BUTTON WRITE PATTERN
-                    OutlinedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const CreatePatternPage(),
-                          ),
-                        );
-                      },
-                      style: OutlinedButton.styleFrom(
-                          side: BorderSide.none,
-                          backgroundColor: Colors.yellow,
-                          padding: const EdgeInsets.all(8)),
-                      child: Text(
-                        'WRITE PATTERN',
-                        style: GoogleFonts.bebasNeue(
-                            fontSize: 22, color: Colors.black),
+              Visibility(
+                visible: Singleton().pattern.name.isEmpty,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      const Text('Pattern:'),
+                      Text(Singleton().pattern.name.toString()),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              Visibility(
+                visible: Singleton().pattern.name.isEmpty,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      //NOTE: BUTTON SELECT PATTERN
+                      OutlinedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ListPatternsPage(),
+                            ),
+                          );
+                        },
+                        style: OutlinedButton.styleFrom(
+                            side: BorderSide.none,
+                            backgroundColor: Colors.green,
+                            padding: const EdgeInsets.all(8)),
+                        child: Text(
+                          'SELECT PATTERN',
+                          style: GoogleFonts.bebasNeue(
+                              fontSize: 22, color: Colors.white),
+                        ),
                       ),
-                    ),
-                  ],
+
+                      //NOTE: BUTTON WRITE PATTERN
+                      OutlinedButton(
+                        onPressed: () {
+                          Singleton().backto = true;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CreatePatternPage(),
+                            ),
+                          );
+                        },
+                        style: OutlinedButton.styleFrom(
+                            side: BorderSide.none,
+                            backgroundColor: Colors.yellow,
+                            padding: const EdgeInsets.all(8)),
+                        child: Text(
+                          'WRITE PATTERN',
+                          style: GoogleFonts.bebasNeue(
+                              fontSize: 22, color: Colors.black),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
 
@@ -159,7 +197,7 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
                         modalMessage(context,
                             'Name of project or pattern should\'nt empty');
                       } else {
-                        //TODO: MAKE FUNCTION CREATE
+                        createProject(nameTextFieldController.text, pattern);
                       }
                     },
                     style: ElevatedButton.styleFrom(
